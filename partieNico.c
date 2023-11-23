@@ -50,3 +50,23 @@ int main() {
 
     // Fermer le fichier
     fclose(file);
+
+    // Afficher les résultats
+    printf("Contraintes d'exclusion :\n");
+
+    for (int i = 0; i < numExclusions; ++i) {
+        printf("%d %d\n", exclusions[i].operation1, exclusions[i].operation2);
+    }
+
+    // Exemple de vérification (vous pouvez adapter cela à votre programme principal)
+    int testOp1 = 1;
+    int testOp2 = 4;
+
+    if (isExcluded(exclusions, numExclusions, testOp1, testOp2)) {
+        printf("Les opérations %d et %d ne peuvent pas être affectées à la même station.\n", testOp1, testOp2);
+    } else {
+        printf("Les opérations %d et %d peuvent être affectées à la même station.\n", testOp1, testOp2);
+    }
+
+    return 0;
+}

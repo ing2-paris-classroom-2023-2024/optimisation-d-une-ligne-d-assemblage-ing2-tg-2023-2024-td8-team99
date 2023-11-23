@@ -33,3 +33,20 @@ int main() {
     int op1, op2;
     int numExclusions = 0;
     ExclusionConstraint exclusions[100]; // Supposons un maximum de 100 exclusions
+
+    while (fscanf(file, "%d %d", &op1, &op2) == 2) {
+        exclusions[numExclusions].operation1 = op1;
+        exclusions[numExclusions].operation2 = op2;
+        numExclusions++;
+
+        // Mettre à jour la valeur maximale de l'opération
+        if (op1 > maxOperation) {
+            maxOperation = op1;
+        }
+        if (op2 > maxOperation) {
+            maxOperation = op2;
+        }
+    }
+
+    // Fermer le fichier
+    fclose(file);

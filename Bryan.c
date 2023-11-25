@@ -15,9 +15,3 @@ struct Graphe {
     int* degreEntrant;
 };
 
-struct Noeud* creerNoeud(int dest) {
-    struct Noeud* nouveauNoeud = (struct Noeud*)malloc(sizeof(struct Noeud));
-    nouveauNoeud->dest = dest;
-    nouveauNoeud->suivant = NULL;
-    return nouveauNoeud;
-}

@@ -87,3 +87,17 @@ void triTopologique(struct Graphe* graphe, int* tableauResultats) {
     free(resultat);
     free(file);
 }
+void inverserTableau(int tableau[], int taille) {
+    int debut = 0;
+    int fin = taille - 1;
+
+    while (debut < fin) {
+        int temp = tableau[debut];
+        tableau[debut] = tableau[fin];
+        tableau[fin] = temp;
+
+        debut++;
+        fin--;
+    }
+}
+

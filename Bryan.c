@@ -106,3 +106,66 @@ void supprimerDernierElement(int tableau[], int* taille) {
         (*taille)--;
     }
 }
+
+int main() {
+    FILE* fichier = fopen("precedence.txt", "r");
+    if (!fichier) {
+        perror("Erreur lors de l'ouverture du fichier");
+        return 1;
+    }
+
+    int src, dest, maxSommet = 0;
+
+    // Analyser le fichier pour déterminer le nombre maximal de sommets
+    while (fscanf(fichier, "%d %d", &src, &dest) == 2) {
+        if (src > maxSommet) maxSommet = src;
+        if (dest > maxSommet) maxSommet = dest;
+    }
+
+    printf("Nombre de sommets : %d\n", maxSommet + 1);
+
+    fclose(fichier);
+    fichier = fopen("precedence.txt", "r");
+    if (!fichier) {
+        perror("Erreur lors de l'ouverture du fichier");
+        return 1;
+    }
+
+    // Utiliser le nombre maximal de sommets pour créer le graphe
+    struct Graphe* graphe = creerGraphe(maxSommet + 1);
+
+    while (fscanf(fichier, "%d %d", &src, &dest) == 2) {
+        printf("Ajout d'une arête : %d -> %d\n", src, dest);
+        ajouterContraintePrecedence(graphe, src, dest);
+    }
+
+    fclose(fichier);
+
+    int tableauResultats[graphe->V];
+
+    triTopologique(graphe, tableauResultats);
+
+    printf("Tri topologique : ");
+    for (int i = 0; i < graphe->V; i++) {
+        if (tableauResultats[i] != -1) {
+            printf("%d ", tableauResultats[i]);
+        }
+    }
+
+    // Inverse le tableau obtenu
+    inverserTableau(tableauResultats, graphe->V);
+
+    // Supprime le dernier élément du tableau inversé
+    supprimerDernierElement(tableauResultats, &(graphe->V));
+
+    printf("\nTableau inversé après suppression du dernier élément : ");
+    for (int i = 0; i < graphe->V; i++) {
+        printf("%d ", tableauResultats[i]);
+    }
+
+    free(graphe->listesAdj);
+    free(graphe->degreEntrant);
+    free(graphe);
+
+    return 0;
+}

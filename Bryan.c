@@ -101,3 +101,8 @@ void inverserTableau(int tableau[], int taille) {
     }
 }
 
+void supprimerDernierElement(int tableau[], int* taille) {
+    if (*taille > 0) {
+        (*taille)--;
+    }
+}

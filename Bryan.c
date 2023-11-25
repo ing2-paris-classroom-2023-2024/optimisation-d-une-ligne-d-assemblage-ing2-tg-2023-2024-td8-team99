@@ -35,3 +35,10 @@ struct Graphe* creerGraphe(int V) {
 
     return graphe;
 }
+void ajouterContraintePrecedence(struct Graphe* graphe, int src, int dest) {
+    struct Noeud* nouveauNoeud = creerNoeud(src);
+    nouveauNoeud->suivant = graphe->listesAdj[dest];
+    graphe->listesAdj[dest] = nouveauNoeud;
+
+    graphe->degreEntrant[src]++;
+}

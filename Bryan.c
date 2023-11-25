@@ -42,3 +42,48 @@ void ajouterContraintePrecedence(struct Graphe* graphe, int src, int dest) {
 
     graphe->degreEntrant[src]++;
 }
+void triTopologique(struct Graphe* graphe, int* tableauResultats) {
+    int* resultat = (int*)malloc(graphe->V * sizeof(int));
+    for (int i = 0; i < graphe->V; i++) {
+        resultat[i] = -1;
+    }
+    int indexResultat = 0;
+
+    int* file = (int*)malloc(graphe->V * sizeof(int));
+    int debutFile = 0, finFile = -1;
+
+    for (int i = 0; i < graphe->V; i++) {
+        if (graphe->degreEntrant[i] == 0) {
+            file[++finFile] = i;
+        }
+    }
+
+    while (debutFile <= finFile) {
+        int u = file[debutFile++];
+        resultat[indexResultat++] = u;
+
+        struct Noeud* temp = graphe->listesAdj[u];
+        while (temp != NULL) {
+            if (--graphe->degreEntrant[temp->dest] == 0) {
+                file[++finFile] = temp->dest;
+            }
+            temp = temp->suivant;
+        }
+    }
+
+    if (indexResultat != graphe->V) {
+        printf("Le graphe contient un cycle, le tri topologique n'est pas possible.\n");
+        free(resultat);
+        free(file);
+        return;
+    }
+
+    for (int i = 0, j = 0; i < graphe->V; i++) {
+        if (resultat[i] != -1) {
+            tableauResultats[j++] = resultat[i];
+        }
+    }
+
+    free(resultat);
+    free(file);
+}

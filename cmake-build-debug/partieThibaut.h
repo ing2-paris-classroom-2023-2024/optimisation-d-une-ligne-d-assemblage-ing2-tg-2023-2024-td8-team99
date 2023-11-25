@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+<<<<<<< HEAD
 // Structure d'un arc
 typedef struct Arc
     {
@@ -31,4 +32,6 @@ typedef struct Graphe
     t_sommet* t_sommet;
     }t_graphe;
 
+=======
+>>>>>>> origin/main
 #endif //OPTIMISATION_D_UNE_LIGNE_D_ASSEMBLAGE_ING2_TG_2023_2024_TD8_TEAM99_PARTIETHIBAUT_H

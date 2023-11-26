@@ -1,8 +1,9 @@
 //
 // Created by thiba on 20/11/2023.
 //
-
+//test
 #include "partieThibaut.h"
+
 // Affichage des successeurs de chaque sommet
 void afficher_successeurs(t_sommet* sommet, int num)
 {

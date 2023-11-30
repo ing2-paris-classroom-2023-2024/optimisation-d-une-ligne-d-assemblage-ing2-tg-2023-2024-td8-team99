@@ -50,5 +50,15 @@ int main() {
 
     fclose(fichier);
 
+    // Exemple d'utilisation
+    welshPowell(matriceAdjacence, nbStations, stationsExistantes);
 
+    // Libération de la mémoire
+    for (int i = 0; i <= nbStations; i++) {
+        free(matriceAdjacence[i]);
+    }
+    free(matriceAdjacence);
+    free(stationsExistantes);
+
+    return 0;
 }

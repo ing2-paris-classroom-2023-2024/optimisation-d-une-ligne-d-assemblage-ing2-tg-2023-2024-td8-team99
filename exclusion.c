@@ -31,4 +31,24 @@ int main() {
     for (int i = 0; i<= nbStations;i++ ) {
         matriceAdjacence[i] = (int*) calloc((nbStations + 1), sizeof (int));
     }
+    // Remplissage de la matrice d'adjacence
+    fichier = fopen("exclusions.txt", "r");
+    while (fscanf(fichier, "%d %d", &station1, &station2) == 2) {
+        matriceAdjacence[station1][station2] = 1;
+        matriceAdjacence[station2][station1] = 1;
+    }
+    fclose(fichier);
+
+    // Stations existantes dans le fichier
+    int *stationsExistantes = (int *)calloc((nbStations + 1), sizeof(int));
+
+    fichier = fopen("exclusions.txt", "r");
+    while (fscanf(fichier, "%d %d", &station1, &station2) == 2) {
+        stationsExistantes[station1] = 1;
+        stationsExistantes[station2] = 1;
+    }
+
+    fclose(fichier);
+
+
 }

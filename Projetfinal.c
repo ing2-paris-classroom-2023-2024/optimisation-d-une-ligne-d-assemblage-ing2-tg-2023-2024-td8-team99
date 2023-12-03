@@ -81,7 +81,7 @@ void traiterFichier(int **triTopologiqueResult) {
         triTopologique(matricePrecedence, nombreSommets, *triTopologiqueResult);
 
         // Affichage du résultat du tri topologique
-        printf("Tri topologique des sommets :\n");
+        printf("Ordre des operations :\n");
         for (int i = 0; i < nombreSommets; ++i) {
             if ((*triTopologiqueResult)[i] != 0) {
                 printf("%d ", (*triTopologiqueResult)[i]);
@@ -437,6 +437,7 @@ void project(){
     welshPowell(matriceAdjacence, nb_sommet_wesh, stationsExistantes, tableauSommets, &nombreDeCouleurs);
 
     // Affichage des sommets avec leur couleur
+    printf("Exlusions \n");
     for (int i = 1; i <= nb_sommet_wesh; i++) {
         if(tableauSommets[i].numero_couleur!=0) {
             printf("Sommet %d - Couleur: %d\n", tableauSommets[i].numeroSommet, tableauSommets[i].numero_couleur);
@@ -446,6 +447,7 @@ void project(){
     printf("\n");
     int nb_sommet_temps;
     Sommet *Tableau_sommet_temps= traiterFichier_temps(&nb_sommet_temps);
+    printf("Temps \n");
     for (int i = 0; i < nb_sommet_temps; i++) {
         printf("Sommet %d - Temps: %.2f\n", Tableau_sommet_temps[i].numeroSommet, Tableau_sommet_temps[i].tempsExecution);
     }
@@ -465,6 +467,7 @@ void project(){
             }
         }
     }
+    printf("Numero de sommet , temps et numero de station:\n\n");
     for (int i = 0; i < nb_sommet_temps; i++) {
         //  if(Tableau_sommet_temps[i].numero_couleur!=0) {
         printf("Sommet %d - Couleur: %d - Temps: %.2f\n", Tableau_sommet_temps[i].numeroSommet,
@@ -478,9 +481,8 @@ void project(){
      }
      */
     nombreDeCouleurs++;
-    printf("Contrainte precedence et temps \n");
+    printf("Contrainte Exclusions et temps V1 \n");
     printf("Nombre de station differente %d\n",nombreDeCouleurs);
-    printf("\n");
     printf("\n");
     for(int w =0;w <nombreDeCouleurs;w++){
         float Somme =0;
@@ -524,7 +526,9 @@ void project(){
         //printf("->");
         if((Somme + Tableau_sommet_temps[l].tempsExecution) <= TempsCycle){
 
+
             printf(" operation %d\n",Tableau_sommet_temps[l].numeroSommet);
+
         }
         if((Somme + Tableau_sommet_temps[l].tempsExecution) >= TempsCycle) {
             C++;
@@ -539,13 +543,18 @@ void project(){
         Somme += Tableau_sommet_temps[l].tempsExecution;
     }
     int *triTopologiqueResult;
+    printf("\n \n");
+    printf("Precedence  \n");
     traiterFichier(&triTopologiqueResult);
+    printf("  \n");
+
+
     precedence_et_temp(Tableau_sommet_temps,triTopologiqueResult,TempsCycle,nb_sommet_temps);
     printf(" Temps du cycle  %.2f\n",Somme);
     printf("\n");
     printf("\n");
 
-
+    printf("exclusions et Temps  version  finale\n");
     Machine *Station_Couleur= creerMachines(TempsCycle, nombreDeCouleurs, nb_sommet_temps);
     remplirMachines(Tableau_sommet_temps, nb_sommet_temps, Station_Couleur,TempsCycle,nombreDeCouleurs);
 
@@ -570,4 +579,5 @@ int main() {
 
     return 0;
 }
+
 

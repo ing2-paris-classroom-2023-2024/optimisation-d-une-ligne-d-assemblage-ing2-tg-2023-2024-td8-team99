@@ -3,5 +3,5 @@ project(optimisation_d_une_ligne_d_assemblage_ing2_tg_2023_2024_td8_team99 C)
 
 set(CMAKE_C_STANDARD 23)
 
-add_executable(optimisation_d_une_ligne_d_assemblage_ing2_tg_2023_2024_td8_team99 partieThibaut.c Projetfinal.c Bryan.c exclusion.c partieThibaut.h partieThibaut.h)
+add_executable(optimisation_d_une_ligne_d_assemblage_ing2_tg_2023_2024_td8_team99  Projetfinal.c )
 
